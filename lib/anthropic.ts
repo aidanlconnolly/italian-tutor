@@ -149,3 +149,81 @@ Record the lemma and its English-language reference info via the tool.`;
   }
   return toolUse.input as WordLookup;
 }
+
+/* ─────────── Translation grading ─────────── */
+
+export type TranslationGrade = {
+  score: 0 | 1 | 2;
+  corrected?: string;
+  feedback: string;
+  miss_lemmas?: string[];
+};
+
+const GRADE_TOOL = {
+  name: "grade_translation",
+  description:
+    "Grade a learner's translation between English and Italian. Return a 0-2 score, a corrected version if needed, plain-English feedback, and up to 5 Italian lemmas the learner appears to be weak on.",
+  input_schema: {
+    type: "object" as const,
+    properties: {
+      score: {
+        type: "integer",
+        enum: [0, 1, 2],
+        description:
+          "2 = essentially correct (any difference is just stylistic). 1 = understandable but with grammar or vocabulary mistakes. 0 = wrong or unintelligible.",
+      },
+      corrected: {
+        type: "string",
+        description:
+          "Cleaned-up Italian (or English) version of the learner's answer. Only fill in if score < 2.",
+      },
+      feedback: {
+        type: "string",
+        description:
+          "1-2 sentences of plain-English coaching. If something specific is wrong, name it.",
+      },
+      miss_lemmas: {
+        type: "array",
+        items: { type: "string" },
+        description:
+          "Up to 5 Italian lemmas the learner likely needs more practice on. Empty if score is 2.",
+        maxItems: 5,
+      },
+    },
+    required: ["score", "feedback"],
+  },
+};
+
+const GRADE_SYSTEM = `You are an Italian tutor grading a single translation by an A1-B1 English-speaking learner. Always call the grade_translation tool. Be lenient on word order and stylistic synonyms when meaning is preserved. Be strict on conjugation, gender agreement, and article choice. Feedback should be encouraging but specific.`;
+
+export async function gradeTranslation(args: {
+  direction: "it-to-en" | "en-to-it";
+  prompt: string;
+  reference: string;
+  learner: string;
+}): Promise<TranslationGrade> {
+  const { direction, prompt, reference, learner } = args;
+  const userMsg = `Direction: ${direction === "en-to-it" ? "English → Italian" : "Italian → English"}
+Source: "${prompt}"
+Reference good answer: "${reference}"
+Learner answer: "${learner}"
+
+Grade via grade_translation.`;
+
+  const response = await client().messages.create({
+    model: "claude-haiku-4-5",
+    max_tokens: 1024,
+    system: GRADE_SYSTEM,
+    tools: [GRADE_TOOL],
+    tool_choice: { type: "tool", name: GRADE_TOOL.name },
+    messages: [{ role: "user", content: userMsg }],
+  });
+
+  const toolUse = response.content.find((b) => b.type === "tool_use");
+  if (!toolUse || toolUse.type !== "tool_use") {
+    throw new Error(
+      `Claude did not call grade tool. Stop reason: ${response.stop_reason}`,
+    );
+  }
+  return toolUse.input as TranslationGrade;
+}

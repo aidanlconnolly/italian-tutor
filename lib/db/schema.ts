@@ -92,6 +92,54 @@ export const textsRelations = relations(texts, ({ many }) => ({
   cards: many(cards),
 }));
 
+/* ─────────── Roadmap progress ─────────── */
+
+export const lessonProgress = sqliteTable(
+  "lesson_progress",
+  {
+    id: text("id").primaryKey(),
+    lessonSlug: text("lesson_slug").notNull().unique(),
+    unitSlug: text("unit_slug").notNull(),
+    completedAt: integer("completed_at").notNull(),
+    score: integer("score").notNull().default(100),
+  },
+  (t) => [index("lesson_progress_unit_idx").on(t.unitSlug)],
+);
+
+export const checkpointAttempts = sqliteTable(
+  "checkpoint_attempts",
+  {
+    id: text("id").primaryKey(),
+    unitSlug: text("unit_slug").notNull(),
+    score: integer("score").notNull(),
+    passed: integer("passed", { mode: "boolean" }).notNull(),
+    takenAt: integer("taken_at").notNull(),
+  },
+  (t) => [index("checkpoint_attempts_unit_idx").on(t.unitSlug)],
+);
+
+export const readProgress = sqliteTable(
+  "read_progress",
+  {
+    id: text("id").primaryKey(),
+    readSlug: text("read_slug").notNull().unique(),
+    completedAt: integer("completed_at").notNull(),
+    comprehensionScore: integer("comprehension_score").notNull().default(0),
+  },
+);
+
+export const streaks = sqliteTable("streaks", {
+  kind: text("kind").primaryKey(),
+  current: integer("current").notNull().default(0),
+  longest: integer("longest").notNull().default(0),
+  lastDay: text("last_day"),
+});
+
+export type LessonProgress = typeof lessonProgress.$inferSelect;
+export type CheckpointAttempt = typeof checkpointAttempts.$inferSelect;
+export type ReadProgress = typeof readProgress.$inferSelect;
+export type Streak = typeof streaks.$inferSelect;
+
 export type Word = typeof words.$inferSelect;
 export type NewWord = typeof words.$inferInsert;
 export type Card = typeof cards.$inferSelect;

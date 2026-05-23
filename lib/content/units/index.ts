@@ -8,6 +8,11 @@ import { UNIT_ABOUT_ME } from "./06-about-me";
 import { UNIT_QUESTIONS } from "./07-questions";
 import { UNIT_LIKES_WANTS } from "./08-likes-wants";
 import { UNIT_CONNECTORS } from "./09-connectors";
+import { UNIT_TRANSIT } from "./10-transit";
+import { UNIT_DIRECTIONS } from "./11-directions";
+import { UNIT_HOTEL } from "./12-hotel";
+import { UNIT_HELP } from "./13-help";
+import { UNIT_LANDMARKS } from "./14-landmarks";
 
 /**
  * All authored units, in stage+order sequence.
@@ -23,6 +28,11 @@ export const UNITS: Unit[] = [
   UNIT_QUESTIONS,
   UNIT_LIKES_WANTS,
   UNIT_CONNECTORS,
+  UNIT_TRANSIT,
+  UNIT_DIRECTIONS,
+  UNIT_HOTEL,
+  UNIT_HELP,
+  UNIT_LANDMARKS,
 ];
 
 export const UNITS_BY_SLUG: Record<string, Unit> = Object.fromEntries(

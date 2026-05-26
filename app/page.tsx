@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getDailyStats } from "@/lib/actions/review";
-import { getRoadmapSummary } from "@/lib/actions/progress";
-import { pickTodaysRead } from "@/lib/content/reads";
+import { getAllReadProgress, getRoadmapSummary } from "@/lib/actions/progress";
+import { findRead, pickTodaysRead } from "@/lib/content/reads";
 import { Roadmap } from "@/components/Roadmap";
 
 export const dynamic = "force-dynamic";
@@ -20,6 +20,27 @@ export default async function Home() {
     summary = await getRoadmapSummary();
   } catch (err) {
     summary = { error: err instanceof Error ? err.message : String(err) };
+  }
+
+  let pastReads: { slug: string; titleIt: string; titleEn: string; completedAt: number; score: number }[] = [];
+  try {
+    const rows = await getAllReadProgress();
+    pastReads = rows
+      .map((r) => {
+        const meta = findRead(r.readSlug);
+        if (!meta) return null;
+        return {
+          slug: r.readSlug,
+          titleIt: meta.titleIt,
+          titleEn: meta.titleEn,
+          completedAt: r.completedAt,
+          score: r.comprehensionScore,
+        };
+      })
+      .filter((r): r is NonNullable<typeof r> => r !== null)
+      .sort((a, b) => b.completedAt - a.completedAt);
+  } catch {
+    pastReads = [];
   }
 
   const readsCompleted =
@@ -119,6 +140,38 @@ export default async function Home() {
         </Link>
       </section>
 
+      {/* Past reads */}
+      {pastReads.length > 0 && (
+        <section className="mb-10">
+          <h2 className="mb-3 text-xs font-bold uppercase tracking-widest text-zinc-500">
+            Past reads · {pastReads.length}
+          </h2>
+          <ul className="divide-y divide-zinc-200 rounded-lg border border-zinc-200 bg-white dark:divide-zinc-800 dark:border-zinc-800 dark:bg-zinc-950">
+            {pastReads.map((r) => (
+              <li key={r.slug}>
+                <Link
+                  href={`/read/${r.slug}`}
+                  className="flex items-center gap-3 px-4 py-2.5 text-sm hover:bg-amber-50 dark:hover:bg-amber-950/20"
+                >
+                  <span className="text-emerald-600 dark:text-emerald-400">✓</span>
+                  <span className="flex-1 min-w-0">
+                    <span className="block truncate font-serif" lang="it">
+                      {r.titleIt}
+                    </span>
+                    <span className="block truncate text-[11px] italic text-zinc-500">
+                      {r.titleEn}
+                    </span>
+                  </span>
+                  <span className="shrink-0 text-[11px] text-zinc-500">
+                    {formatDate(r.completedAt)}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       {/* Errors */}
       {stats && "error" in stats && (
         <div className="mb-6 rounded-lg border border-amber-300 bg-amber-50 p-4 text-xs text-amber-900 dark:border-amber-700 dark:bg-amber-950/40 dark:text-amber-200">
@@ -168,6 +221,17 @@ function DifficultyBadge({ value }: { value: number }) {
       {formatted}/10
     </span>
   );
+}
+
+function formatDate(ts: number): string {
+  const d = new Date(ts);
+  const now = new Date();
+  const sameYear = d.getFullYear() === now.getFullYear();
+  return d.toLocaleDateString(undefined, {
+    month: "short",
+    day: "numeric",
+    ...(sameYear ? {} : { year: "numeric" }),
+  });
 }
 
 function StatCard({ label, value }: { label: string; value: string }) {

@@ -15,11 +15,10 @@ export function MultipleChoicePage({
   );
 
   useEffect(() => {
-    const allAnswered = answers.every(
-      (a, i) => a !== null && a === page.questions[i].correct,
-    );
-    setDone(allAnswered);
-  }, [answers, page.questions, setDone]);
+    // Advance once every question has been attempted — correctness is not required.
+    const allAttempted = answers.every((a) => a !== null);
+    setDone(allAttempted);
+  }, [answers, setDone]);
 
   return (
     <div className="space-y-6">
@@ -106,9 +105,6 @@ function McQuestion({
         <div className="mt-3 rounded border border-rose-300 bg-rose-50 p-2 text-xs text-rose-900 dark:border-rose-700 dark:bg-rose-950/30 dark:text-rose-200">
           <span className="font-semibold">Not quite.</span>{" "}
           {q.fb ?? `The answer is "${q.options[q.correct]}".`}
-          <div className="mt-1 font-semibold">
-            👆 Tap the correct answer (shown in green) to continue.
-          </div>
         </div>
       )}
       {answered && correct && (

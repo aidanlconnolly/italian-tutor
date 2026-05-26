@@ -26,11 +26,10 @@ export function FillBlankPage({
   );
 
   useEffect(() => {
-    const allCorrect = page.items.every(
-      (item, i) => submitted[i] && normalize(answers[i]) === normalize(item.answer),
-    );
-    setDone(allCorrect);
-  }, [submitted, answers, page.items, setDone]);
+    // Advance once every blank has been submitted — correctness is not required.
+    const allAttempted = submitted.every(Boolean);
+    setDone(allAttempted);
+  }, [submitted, setDone]);
 
   function submit(i: number, value?: string) {
     if (value !== undefined) {

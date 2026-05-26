@@ -1,9 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useState, useTransition } from "react";
+import { useCallback, useEffect, useState, useTransition } from "react";
 import type { Lesson, LessonPage, Unit } from "@/lib/content/types";
 import { markLessonDone } from "@/lib/actions/progress";
+
+function lessonProgressKey(slug: string): string {
+  return `lesson-progress:${slug}`;
+}
 import { IntroPage } from "./pages/IntroPage";
 import { VocabPage } from "./pages/VocabPage";
 import { DialoguePage } from "./pages/DialoguePage";
@@ -68,6 +72,32 @@ export function LessonPlayer({
   const [completed, setCompleted] = useState(false);
   const [pendingSave, startSave] = useTransition();
 
+  // Restore last visited page index from localStorage on mount.
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(lessonProgressKey(lesson.slug));
+      if (raw === null) return;
+      const saved = Number.parseInt(raw, 10);
+      if (Number.isFinite(saved) && saved > 0 && saved < lesson.pages.length) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setPageIdx(saved);
+      }
+    } catch {
+      // localStorage unavailable — ignore.
+    }
+    // Only restore once, on mount for this lesson.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lesson.slug]);
+
+  // Persist current page index whenever it changes.
+  useEffect(() => {
+    try {
+      localStorage.setItem(lessonProgressKey(lesson.slug), String(pageIdx));
+    } catch {
+      // ignore
+    }
+  }, [lesson.slug, pageIdx]);
+
   const setDone = useCallback(
     (i: number) => (b: boolean) =>
       setPageDone((prev) => {
@@ -91,6 +121,11 @@ export function LessonPlayer({
           lessonSlug: lesson.slug,
           score: 100,
         });
+        try {
+          localStorage.removeItem(lessonProgressKey(lesson.slug));
+        } catch {
+          // ignore
+        }
         setCompleted(true);
       });
     } else {

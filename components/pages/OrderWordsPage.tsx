@@ -54,9 +54,10 @@ export function OrderWordsPage({
   }
 
   useEffect(() => {
-    const allDone = page.items.every((it, i) => isCorrect(it, states[i]));
-    setDone(allDone);
-  }, [states, page.items, setDone]);
+    // Advance once every item has been committed (all tokens placed) — correctness is not required.
+    const allAttempted = states.every((st) => st.remaining.length === 0);
+    setDone(allAttempted);
+  }, [states, setDone]);
 
   function pick(itemIdx: number, tokenIdx: number) {
     setStates((prev) => {

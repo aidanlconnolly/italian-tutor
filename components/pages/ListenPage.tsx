@@ -22,11 +22,10 @@ export function ListenPage({
   }, []);
 
   useEffect(() => {
-    const allCorrect = answers.every(
-      (a, i) => a !== null && a === page.items[i].correct,
-    );
-    setDone(allCorrect);
-  }, [answers, page.items, setDone]);
+    // Advance once every item has been attempted — correctness is not required.
+    const allAttempted = answers.every((a) => a !== null);
+    setDone(allAttempted);
+  }, [answers, setDone]);
 
   return (
     <div className="space-y-5">

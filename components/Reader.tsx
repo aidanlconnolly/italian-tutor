@@ -43,7 +43,7 @@ export function Reader({
           onChange={(e) => setDraft(e.target.value)}
           rows={10}
           spellCheck={false}
-          className="w-full rounded-lg border border-zinc-300 bg-white p-4 font-serif text-lg leading-relaxed shadow-sm focus:border-amber-500 focus:outline-none dark:border-zinc-700 dark:bg-zinc-950"
+          className="w-full rounded-lg border border-zinc-300 bg-white p-4 font-serif text-base leading-relaxed shadow-sm focus:border-amber-500 focus:outline-none dark:border-zinc-700 dark:bg-zinc-950 sm:text-lg"
           placeholder="Incolla un testo italiano…"
         />
         <div className="flex items-center gap-3">
@@ -76,7 +76,7 @@ export function Reader({
         ← New text
       </button>
 
-      <div className="whitespace-pre-wrap font-serif text-xl leading-relaxed">
+      <div className="whitespace-pre-wrap font-serif text-lg leading-loose sm:text-xl sm:leading-relaxed">
         {tokens.map((tok, i) =>
           tok.type === "word" ? (
             <TappableWord

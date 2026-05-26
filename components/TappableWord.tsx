@@ -22,12 +22,14 @@ export function TappableWord({
   return (
     <button
       type="button"
+      data-tappable-word
       onClick={(e) => {
         const rect = e.currentTarget.getBoundingClientRect();
         onTap({ surface, sentence, rect });
       }}
       className={[
-        "rounded px-0.5 transition-colors cursor-pointer",
+        "rounded px-0.5 py-0.5 transition-colors cursor-pointer touch-manipulation",
+        "active:bg-amber-200 dark:active:bg-amber-800/60",
         isOpen
           ? "bg-amber-200 dark:bg-amber-800/60"
           : "hover:bg-amber-100 dark:hover:bg-amber-900/40",

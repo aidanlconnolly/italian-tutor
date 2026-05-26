@@ -116,20 +116,23 @@ export function CheckpointRunner({
 
   return (
     <div className="flex h-screen flex-col font-sans">
-      <header className="flex items-center gap-4 border-b-2 border-emerald-500 bg-zinc-950 px-4 py-3 text-white">
+      <header
+        className="flex items-center gap-3 border-b-2 border-emerald-500 bg-zinc-950 px-3 py-2.5 text-white sm:gap-4 sm:px-4 sm:py-3"
+        style={{ paddingTop: "calc(env(safe-area-inset-top) + 0.625rem)" }}
+      >
         <Link
           href="/"
-          className="text-sm font-semibold text-emerald-400 hover:text-emerald-300"
+          className="shrink-0 text-sm font-semibold text-emerald-400 hover:text-emerald-300"
         >
           ← Exit
         </Link>
-        <div className="flex-1">
+        <div className="min-w-0 flex-1">
           <div className="text-[10px] font-bold uppercase tracking-widest text-emerald-400">
             🏆 Unit checkpoint
           </div>
-          <div className="text-sm font-semibold">{unit.title}</div>
+          <div className="truncate text-sm font-semibold">{unit.title}</div>
         </div>
-        <div className="text-xs text-emerald-300">
+        <div className="shrink-0 text-xs text-emerald-300">
           {qi + 1} / {total}
         </div>
       </header>
@@ -180,12 +183,17 @@ export function CheckpointRunner({
         </div>
       </div>
 
-      <footer className="flex items-center justify-end border-t border-zinc-200 bg-white px-4 py-3 dark:border-zinc-800 dark:bg-zinc-950">
+      <footer
+        className="flex items-center justify-end border-t border-zinc-200 bg-white px-4 py-3 dark:border-zinc-800 dark:bg-zinc-950"
+        style={{
+          paddingBottom: "calc(env(safe-area-inset-bottom) + 0.75rem)",
+        }}
+      >
         <button
           type="button"
           onClick={next}
           disabled={chosen === null || pending}
-          className="rounded bg-emerald-600 px-5 py-2 text-sm font-semibold text-white hover:bg-emerald-700 disabled:opacity-40"
+          className="w-full rounded bg-emerald-600 px-5 py-3 text-sm font-semibold text-white hover:bg-emerald-700 disabled:opacity-40 sm:w-auto sm:py-2"
         >
           {pending ? "Saving…" : qi === total - 1 ? "Submit" : "Next →"}
         </button>

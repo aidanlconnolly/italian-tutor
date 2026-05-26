@@ -145,20 +145,23 @@ export function LessonPlayer({
   return (
     <div className="flex h-screen flex-col font-sans">
       {/* Header */}
-      <header className="flex items-center gap-4 border-b border-amber-500/30 bg-zinc-950 px-4 py-3 text-white">
+      <header
+        className="flex items-center gap-3 border-b border-amber-500/30 bg-zinc-950 px-3 py-2.5 text-white sm:gap-4 sm:px-4 sm:py-3"
+        style={{ paddingTop: "calc(env(safe-area-inset-top) + 0.625rem)" }}
+      >
         <Link
           href="/"
-          className="text-sm font-semibold text-amber-400 hover:text-amber-300"
+          className="shrink-0 text-sm font-semibold text-amber-400 hover:text-amber-300"
         >
-          ← Roadmap
+          ← <span className="hidden sm:inline">Roadmap</span>
         </Link>
-        <div className="flex-1 overflow-hidden">
-          <div className="text-[10px] font-bold uppercase tracking-widest text-amber-400">
+        <div className="min-w-0 flex-1 overflow-hidden">
+          <div className="truncate text-[10px] font-bold uppercase tracking-widest text-amber-400">
             {unit.icon} {unit.title}
           </div>
           <div className="truncate text-sm font-semibold">{lesson.title}</div>
         </div>
-        <div className="flex shrink-0 items-center gap-1.5">
+        <div className="hidden shrink-0 items-center gap-1.5 sm:flex">
           {lesson.pages.map((_, i) => (
             <span
               key={i}
@@ -172,6 +175,9 @@ export function LessonPlayer({
               ].join(" ")}
             />
           ))}
+        </div>
+        <div className="shrink-0 text-[11px] font-semibold text-amber-300 sm:hidden">
+          {pageIdx + 1}/{total}
         </div>
       </header>
 
@@ -198,16 +204,21 @@ export function LessonPlayer({
       </div>
 
       {/* Footer */}
-      <footer className="flex items-center justify-between gap-3 border-t border-zinc-200 bg-white px-4 py-3 dark:border-zinc-800 dark:bg-zinc-950">
-        <div className="text-xs text-zinc-400">
+      <footer
+        className="flex items-center justify-between gap-3 border-t border-zinc-200 bg-white px-4 py-3 dark:border-zinc-800 dark:bg-zinc-950"
+        style={{
+          paddingBottom: "calc(env(safe-area-inset-bottom) + 0.75rem)",
+        }}
+      >
+        <div className="hidden text-xs text-zinc-400 sm:block">
           Page {pageIdx + 1} of {total}
         </div>
-        <div className="flex gap-2">
+        <div className="flex w-full gap-2 sm:w-auto">
           <button
             type="button"
             onClick={prev}
             disabled={pageIdx === 0}
-            className="rounded bg-zinc-200 px-4 py-2 text-sm font-semibold text-zinc-700 hover:bg-zinc-300 disabled:opacity-40 dark:bg-zinc-800 dark:text-zinc-200"
+            className="rounded bg-zinc-200 px-4 py-3 text-sm font-semibold text-zinc-700 hover:bg-zinc-300 disabled:opacity-40 dark:bg-zinc-800 dark:text-zinc-200 sm:py-2"
           >
             ← Back
           </button>
@@ -216,7 +227,7 @@ export function LessonPlayer({
             onClick={next}
             disabled={!canAdvance || pendingSave}
             className={[
-              "rounded px-5 py-2 text-sm font-semibold text-white transition-colors",
+              "flex-1 rounded px-5 py-3 text-sm font-semibold text-white transition-colors sm:flex-none sm:py-2",
               isLast ? "bg-emerald-600 hover:bg-emerald-700" : "bg-amber-600 hover:bg-amber-700",
               "disabled:opacity-40",
             ].join(" ")}

@@ -221,7 +221,7 @@ export function DailyReadView({ read }: { read: DailyRead }) {
         >
           {showEn ? "Hide English" : "Show English"}
         </button>
-        <div className="ml-auto text-xs text-zinc-500">
+        <div className="basis-full text-xs text-zinc-500 sm:ml-auto sm:basis-auto">
           Tap any Italian word to save it to your deck.
         </div>
       </div>
@@ -239,11 +239,11 @@ export function DailyReadView({ read }: { read: DailyRead }) {
               showEn ? "md:grid-cols-2" : "md:grid-cols-1",
             ].join(" ")}
           >
-            <div className="font-serif text-lg leading-relaxed">
+            <div className="font-serif text-base leading-loose sm:text-lg sm:leading-relaxed">
               <TappableSentence text={p.it} />
             </div>
             {showEn && (
-              <div className="border-l-2 border-zinc-200 pl-4 text-base italic text-zinc-600 dark:border-zinc-700 dark:text-zinc-400">
+              <div className="border-l-2 border-zinc-200 pl-3 text-sm italic text-zinc-600 dark:border-zinc-700 dark:text-zinc-400 sm:pl-4 sm:text-base">
                 {p.en}
               </div>
             )}

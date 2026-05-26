@@ -19,8 +19,29 @@
   }
 }
 
+html {
+  /* Smooth scroll for in-page anchors and Reader's scroll-to-top */
+  scroll-behavior: smooth;
+  /* Prevent iOS Safari from auto-zooming the layout when rotating */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  /* Kill iOS tap-highlight flash; we provide our own active states */
+  -webkit-tap-highlight-color: transparent;
+  /* Honor iPhone safe areas where layouts touch the screen edge */
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* Disable text selection on tappable Italian words — long-press should
+   open the popover, not the OS selection bubble. */
+button[data-tappable-word] {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
 }

@@ -31,25 +31,25 @@ export default async function Home() {
       : false;
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-10 font-sans sm:px-6">
-      <header className="mb-10 flex items-baseline justify-between">
+    <main className="mx-auto max-w-3xl px-4 py-8 font-sans sm:px-6 sm:py-10">
+      <header className="mb-8 flex flex-col gap-4 sm:mb-10 sm:flex-row sm:items-baseline sm:justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Italian Tutor</h1>
           <p className="mt-1 text-sm text-zinc-500">
             Roadmap to Rome — A0 to B1, ten minutes a day.
           </p>
         </div>
-        <nav className="flex flex-wrap gap-3 text-xs text-zinc-500">
-          <Link href="/read" className="hover:text-amber-700">
+        <nav className="-mx-1 flex flex-wrap gap-x-3 gap-y-1.5 text-xs text-zinc-500">
+          <Link href="/read" className="px-1 py-1 hover:text-amber-700">
             Daily read
           </Link>
-          <Link href="/tools/reader" className="hover:text-amber-700">
+          <Link href="/tools/reader" className="px-1 py-1 hover:text-amber-700">
             Reader
           </Link>
-          <Link href="/tools/review" className="hover:text-amber-700">
+          <Link href="/tools/review" className="px-1 py-1 hover:text-amber-700">
             Review
           </Link>
-          <Link href="/tools/deck" className="hover:text-amber-700">
+          <Link href="/tools/deck" className="px-1 py-1 hover:text-amber-700">
             Deck
           </Link>
         </nav>

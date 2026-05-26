@@ -125,7 +125,7 @@ function UnitNode({
   const cardInner = (
     <div
       className={[
-        "w-full rounded-xl border-2 bg-white p-4 shadow-sm transition-transform hover:-translate-y-0.5 hover:shadow-lg dark:bg-zinc-950",
+        "w-full rounded-xl border-2 bg-white p-4 shadow-sm transition-transform active:scale-[0.99] sm:hover:-translate-y-0.5 sm:hover:shadow-lg dark:bg-zinc-950",
         cardClass,
       ].join(" ")}
     >

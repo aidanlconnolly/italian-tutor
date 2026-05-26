@@ -13,6 +13,7 @@ export type PopoverState = {
 };
 
 const POPOVER_WIDTH = 360;
+const MOBILE_BREAKPOINT = 640;
 
 export function WordPopover({
   state,
@@ -65,11 +66,21 @@ export function WordPopover({
 
   const viewportWidth =
     typeof window !== "undefined" ? window.innerWidth : 1024;
-  const left = Math.max(
-    8,
-    Math.min(state.rect.left, viewportWidth - POPOVER_WIDTH - 8),
-  );
-  const top = state.rect.bottom + 8;
+  const viewportHeight =
+    typeof window !== "undefined" ? window.innerHeight : 800;
+  const isMobile = viewportWidth < MOBILE_BREAKPOINT;
+  // Desktop: anchor under the word; flip above if no room.
+  // Mobile: pin to bottom of viewport as a sheet — never block the tapped word.
+  const left = isMobile
+    ? 8
+    : Math.max(8, Math.min(state.rect.left, viewportWidth - POPOVER_WIDTH - 8));
+  const desktopTop =
+    state.rect.bottom + 8 + 320 > viewportHeight && state.rect.top > 320
+      ? Math.max(8, state.rect.top - 8 - 320)
+      : state.rect.bottom + 8;
+  const top = isMobile ? undefined : desktopTop;
+  const bottom = isMobile ? 8 : undefined;
+  const right = isMobile ? 8 : undefined;
 
   function handleSave() {
     if (!result?.ok || saved || saving) return;
@@ -93,8 +104,16 @@ export function WordPopover({
     <div
       ref={ref}
       role="dialog"
-      className="fixed z-50 w-[360px] max-w-[calc(100vw-16px)] rounded-lg border border-zinc-300 bg-white p-4 shadow-xl dark:border-zinc-700 dark:bg-zinc-900"
-      style={{ top, left }}
+      className="fixed z-50 max-h-[70vh] overflow-y-auto overscroll-contain rounded-lg border border-zinc-300 bg-white p-4 shadow-xl dark:border-zinc-700 dark:bg-zinc-900 sm:w-[360px] sm:max-w-[calc(100vw-16px)]"
+      style={{
+        top,
+        left,
+        right,
+        bottom,
+        paddingBottom: isMobile
+          ? "calc(1rem + env(safe-area-inset-bottom))"
+          : undefined,
+      }}
     >
       <Body
         state={state}

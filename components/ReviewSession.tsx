@@ -94,11 +94,11 @@ export function ReviewSession({ initial }: { initial: ReviewRow[] }) {
     <div className="space-y-6">
       <ProgressBar done={completed} total={queue.length} />
 
-      <div className="rounded-xl border border-zinc-300 bg-white p-8 shadow-sm dark:border-zinc-700 dark:bg-zinc-950">
+      <div className="rounded-xl border border-zinc-300 bg-white p-5 shadow-sm dark:border-zinc-700 dark:bg-zinc-950 sm:p-8">
         <div className="text-[10px] font-medium uppercase tracking-wider text-zinc-400">
           Sentence
         </div>
-        <p className="mt-2 font-serif text-2xl leading-relaxed">
+        <p className="mt-2 font-serif text-xl leading-relaxed sm:text-2xl">
           {phase === "front" ? (
             <span>{redacted}</span>
           ) : (
@@ -171,17 +171,17 @@ export function ReviewSession({ initial }: { initial: ReviewRow[] }) {
           Reveal · <kbd className="rounded bg-white/20 px-1.5 py-0.5 text-[10px]">Space</kbd>
         </button>
       ) : (
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
           {([1, 2, 3, 4] as Rating1to4[]).map((r) => (
             <button
               key={r}
               type="button"
               onClick={() => rate(r)}
               disabled={pending}
-              className={`rounded-lg px-3 py-3 text-sm font-medium shadow-sm transition-colors disabled:opacity-50 ${RATING_CLASSES[r]}`}
+              className={`rounded-lg px-3 py-4 text-sm font-medium shadow-sm transition-colors disabled:opacity-50 sm:py-3 ${RATING_CLASSES[r]}`}
             >
               <div className="flex items-center justify-center gap-1.5">
-                <kbd className="rounded bg-white/20 px-1.5 py-0.5 text-[10px]">
+                <kbd className="hidden rounded bg-white/20 px-1.5 py-0.5 text-[10px] sm:inline">
                   {r}
                 </kbd>
                 {RATING_LABELS[r]}

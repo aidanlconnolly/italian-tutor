@@ -1,0 +1,390 @@
+import type { Unit } from "../types";
+
+export const UNIT_BAR: Unit = {
+  slug: "bar",
+  stage: 4,
+  order: 15,
+  icon: "☕",
+  title: "At the bar",
+  tagline: "Un caffè, un cornetto, e una piccola lezione di cultura. The Italian morning ritual in your second language.",
+  badge: "tourist",
+  lessons: [
+    {
+      slug: "bar-coffee-culture",
+      title: "The Italian bar is not what you think",
+      estMinutes: 8,
+      pages: [
+        {
+          type: "intro",
+          heading: "A 'bar' is mostly about coffee",
+          body: [
+            "In Italy, a <strong>bar</strong> is where you get coffee, pastries, panini, and a quick aperitivo. It's open from ~6am to ~9pm. The Anglo-style night bar is called a <em>pub</em> or <em>cocktail bar</em>.",
+            "Two ways to consume: <strong>al banco</strong> (at the counter, standing — fast and cheap, €1-1.50 for an espresso) or <strong>al tavolo</strong> (at a table, often double the price). On a sunny piazza, the table markup can be 3x.",
+            "<strong>Order, then pay.</strong> In big-city tourist bars, you sometimes pay first at the <em>cassa</em>, get a <em>scontrino</em> (receipt), then hand it to the barista. In neighborhood bars, you order, drink, and pay on the way out.",
+          ],
+          keyPoint:
+            "Bar = coffee shop. Al banco = cheap & fast. Al tavolo = sit-down (pricier). Cassa-first system in busy spots.",
+        },
+        {
+          type: "vocab",
+          heading: "Coffee menu basics",
+          items: [
+            { it: "un caffè", en: "an espresso (default — never just 'a coffee')" },
+            { it: "un caffè doppio", en: "a double espresso" },
+            { it: "un caffè ristretto", en: "a stronger, smaller espresso" },
+            { it: "un caffè lungo", en: "a longer espresso (more water through the same grounds)" },
+            { it: "un macchiato", en: "espresso 'stained' with a drop of foamed milk" },
+            { it: "un cappuccino", en: "espresso + steamed milk + foam (morning only!)" },
+            { it: "un caffè latte", en: "espresso + lots of hot milk (kids' drink, basically)" },
+            { it: "un latte macchiato", en: "hot milk 'stained' with espresso (less coffee than cappuccino)" },
+            { it: "un caffè americano", en: "espresso topped up with hot water" },
+            { it: "un caffè d'orzo", en: "barley coffee (caffeine-free)" },
+            { it: "un caffè decaffeinato / un deca", en: "decaf" },
+            { it: "un caffè corretto", en: "espresso 'corrected' with a shot of grappa or sambuca" },
+          ],
+        },
+        {
+          type: "tip",
+          heading: "The cappuccino-after-10am rule",
+          body: "Italians believe heavy milk drinks (cappuccino, caffè latte) disturb digestion after a meal. So they're a breakfast item only. After lunch or dinner: espresso, espresso, or espresso. Ordering a cappuccino at 4pm or after dinner is the single most-marked-as-tourist thing you can do. A macchiato is the safe middle ground for an afternoon milk-coffee craving.",
+          example: { it: "Per me un macchiato, grazie.", en: "A macchiato for me, please." },
+        },
+        {
+          type: "multipleChoice",
+          heading: "Coffee comprehension",
+          questions: [
+            {
+              q: "What does 'un caffè' mean by default?",
+              options: ["filter coffee", "espresso", "cappuccino", "americano"],
+              correct: 1,
+            },
+            {
+              q: "Order a cappuccino at 4 pm and Italians will think…",
+              options: [
+                "you're sophisticated",
+                "you're a tourist",
+                "you're a regular",
+                "you have great taste",
+              ],
+              correct: 1,
+            },
+            {
+              q: "'Caffè corretto' is corrected with…",
+              options: ["sugar", "extra milk", "a shot of grappa or sambuca", "cinnamon"],
+              correct: 2,
+            },
+            {
+              q: "Al banco vs al tavolo: which is cheaper?",
+              options: [
+                "al tavolo (sitting)",
+                "al banco (standing)",
+                "same price",
+                "depends on time of day",
+              ],
+              correct: 1,
+            },
+            {
+              q: "A 'macchiato' is…",
+              options: [
+                "the Starbucks caramel drink",
+                "espresso stained with a drop of foamed milk",
+                "filter coffee",
+                "espresso with whipped cream",
+              ],
+              correct: 1,
+              fb: "The American 'macchiato' has been thoroughly Starbucked. In Italy it's tiny: espresso + a small dollop of milk foam.",
+            },
+          ],
+        },
+      ],
+    },
+    {
+      slug: "bar-ordering",
+      title: "Ordering — the script",
+      estMinutes: 9,
+      pages: [
+        {
+          type: "intro",
+          heading: "Three phrases get you through any bar",
+          body: [
+            "1. <em>«Per me un [drink], per favore.»</em> = For me a [drink], please. Or <em>«Vorrei un [drink].»</em> = I'd like a [drink].",
+            "2. <em>«Tutto qui?»</em> = Is that everything? Reply: <em>«Sì, grazie.»</em> or <em>«Anche un cornetto, per favore.»</em>",
+            "3. <em>«Quanto Le devo?»</em> = How much do I owe you? Or just <em>«Quant'è?»</em> = How much is it?",
+          ],
+          keyPoint:
+            "Order with 'per me' or 'vorrei'. Add a cornetto. Pay with 'quant'è?'. Done.",
+        },
+        {
+          type: "vocab",
+          heading: "Pastries & savory bites",
+          items: [
+            { it: "un cornetto", en: "a cornetto (Italian croissant — softer, sweeter than French)" },
+            { it: "un cornetto vuoto", en: "an empty cornetto (no filling)" },
+            { it: "un cornetto alla crema", en: "cornetto with cream filling" },
+            { it: "un cornetto alla marmellata", en: "cornetto with jam" },
+            { it: "un cornetto al cioccolato", en: "cornetto with chocolate" },
+            { it: "una brioche", en: "a brioche (similar to cornetto in the north)" },
+            { it: "un panino", en: "a sandwich" },
+            { it: "un tramezzino", en: "a triangular crustless sandwich" },
+            { it: "una pizzetta", en: "a small round pizza" },
+            { it: "uno spuntino", en: "a snack" },
+            { it: "un bicchiere d'acqua", en: "a glass of water" },
+            { it: "un succo d'arancia", en: "an orange juice" },
+            { it: "una spremuta", en: "a freshly squeezed juice" },
+          ],
+        },
+        {
+          type: "dialogue",
+          heading: "Quick breakfast — al banco",
+          setup: "You walk into the corner bar at 8 am.",
+          lines: [
+            { speaker: "You", it: "Buongiorno!", en: "Good morning!" },
+            { speaker: "Barista", it: "Buongiorno, mi dica.", en: "Good morning, tell me." },
+            { speaker: "You", it: "Per me un cappuccino e un cornetto alla crema, per favore.", en: "For me a cappuccino and a cream cornetto, please." },
+            { speaker: "Barista", it: "Tutto qui?", en: "Is that everything?" },
+            { speaker: "You", it: "Sì, grazie.", en: "Yes, thank you." },
+            { speaker: "Barista", it: "Tre euro e cinquanta. Paga prima alla cassa?", en: "Three fifty. Do you pay at the cash register first?" },
+            { speaker: "You", it: "Sì, vado subito. Grazie!", en: "Yes, I'll go right away. Thanks!" },
+          ],
+        },
+        {
+          type: "dialogue",
+          heading: "Sit-down — al tavolo",
+          setup: "It's 11 am, you take a table on the piazza.",
+          lines: [
+            { speaker: "Cameriere", it: "Buongiorno, cosa Le porto?", en: "Good morning, what can I bring you?" },
+            { speaker: "You", it: "Un caffè macchiato e una spremuta d'arancia, per favore.", en: "A macchiato and a freshly-squeezed orange juice, please." },
+            { speaker: "Cameriere", it: "Subito. Qualcosa da mangiare?", en: "Right away. Anything to eat?" },
+            { speaker: "You", it: "No, solo da bere, grazie.", en: "No, just drinks, thanks." },
+            { speaker: "Cameriere", it: "Va bene. Glieli porto subito.", en: "Okay. I'll bring them right away." },
+            { speaker: "You", it: "Grazie. Posso pagare alla fine?", en: "Thanks. Can I pay at the end?" },
+            { speaker: "Cameriere", it: "Certo, paga quando finisce.", en: "Of course, you pay when you're done." },
+          ],
+        },
+        {
+          type: "fillBlank",
+          heading: "Order builder",
+          items: [
+            {
+              template: "___ un caffè macchiato, per favore.",
+              answer: "Vorrei",
+              en: "I'd like a macchiato, please.",
+              options: ["Voglio", "Vorrei", "Posso", "Faccio"],
+            },
+            {
+              template: "Anche un cornetto ___ marmellata.",
+              answer: "alla",
+              en: "Also a jam cornetto.",
+              options: ["alla", "al", "alle", "ai"],
+            },
+            {
+              template: "___ qui?",
+              answer: "Tutto",
+              en: "Is that everything?",
+              options: ["Tutto", "Niente", "Sempre", "Sicuro"],
+            },
+            {
+              template: "Quanto Le ___ ?",
+              answer: "devo",
+              en: "How much do I owe you?",
+              options: ["devo", "do", "ho", "vado"],
+            },
+            {
+              template: "Si paga prima alla ___ ?",
+              answer: "cassa",
+              en: "Do you pay first at the cash register?",
+              options: ["cassa", "porta", "tavola", "uscita"],
+            },
+          ],
+        },
+        {
+          type: "orderWords",
+          heading: "Build the order",
+          items: [
+            { tokens: ["Per", "me", "un", "espresso", "e", "un", "bicchiere", "d'acqua"], en: "For me an espresso and a glass of water." },
+            { tokens: ["Posso", "avere", "uno", "scontrino", ",", "per", "favore", "?"], en: "Can I have a receipt, please?" },
+            { tokens: ["Quanto", "costa", "un", "cappuccino", "al", "tavolo", "?"], en: "How much is a cappuccino at the table?" },
+            { tokens: ["Pago", "io", "per", "tutti", ",", "grazie"], en: "I'll pay for everyone, thank you." },
+          ],
+        },
+      ],
+    },
+    {
+      slug: "bar-aperitivo",
+      title: "Aperitivo — the evening ritual",
+      estMinutes: 9,
+      pages: [
+        {
+          type: "intro",
+          heading: "The bridge between work and dinner",
+          body: [
+            "<strong>Aperitivo</strong> is the Italian happy hour — but with food. From 6 to 9 pm you order a drink (€7-12) and the bar brings you free snacks: olives, chips, mini-sandwiches, sometimes a full buffet.",
+            "Milan is famous for <em>apericena</em> — buffet-style, often a full meal disguised as snacks. Rome does it lighter: a few <em>stuzzichini</em> (small bites) per drink.",
+            "Most-ordered drinks: <strong>Aperol Spritz</strong> (orange, light, ~12% ABV), <strong>Campari Spritz</strong> (more bitter), <strong>Negroni</strong> (gin + Campari + vermouth, strong), <strong>vino della casa</strong> (house wine).",
+          ],
+          keyPoint:
+            "Aperitivo = pre-dinner drink + free snacks. 6-9 pm. €7-12 in Rome. Aperol Spritz is the gateway drink.",
+        },
+        {
+          type: "vocab",
+          heading: "Aperitivo menu",
+          items: [
+            { it: "un Aperol spritz", en: "Aperol Spritz" },
+            { it: "un Campari spritz", en: "Campari Spritz (more bitter)" },
+            { it: "un Negroni", en: "a Negroni" },
+            { it: "un Negroni sbagliato", en: "Negroni 'mistake' — prosecco instead of gin" },
+            { it: "un bicchiere di vino bianco / rosso", en: "a glass of white / red wine" },
+            { it: "un calice", en: "a wine glass" },
+            { it: "un quartino", en: "a small carafe (~25cl) of house wine" },
+            { it: "una birra alla spina", en: "a draft beer" },
+            { it: "una birra piccola / media / grande", en: "small / medium / large beer (20 / 33 / 50 cl)" },
+            { it: "uno stuzzichino", en: "a small bite / snack" },
+            { it: "le olive", en: "olives" },
+            { it: "le patatine", en: "chips / crisps" },
+            { it: "i salumi", en: "cured meats" },
+            { it: "i crostini", en: "small toasted bread with toppings" },
+            { it: "il buffet (apericena)", en: "all-you-can-eat aperitivo buffet" },
+          ],
+        },
+        {
+          type: "dialogue",
+          heading: "Ordering aperitivo for two",
+          setup: "You arrive at a Trastevere bar around 7 pm.",
+          lines: [
+            { speaker: "Cameriere", it: "Buonasera. Per due?", en: "Good evening. Table for two?" },
+            { speaker: "You", it: "Sì, possibilmente fuori, se c'è posto.", en: "Yes, possibly outside, if there's room." },
+            { speaker: "Cameriere", it: "Certo, accomodatevi. Cosa vi porto da bere?", en: "Sure, have a seat. What can I bring you to drink?" },
+            { speaker: "You", it: "Un Aperol spritz e un calice di vino bianco, per favore. Cosa avete come stuzzichini?", en: "An Aperol Spritz and a glass of white wine, please. What do you have as snacks?" },
+            { speaker: "Cameriere", it: "Con l'aperitivo è incluso un piattino con olive, salame, formaggio e patatine.", en: "With the aperitivo is included a small plate with olives, salami, cheese, and chips." },
+            { speaker: "You", it: "Perfetto, grazie. Quant'è in totale?", en: "Perfect, thanks. How much is it total?" },
+            { speaker: "Cameriere", it: "Quattordici euro, tutto incluso.", en: "Fourteen euros, all included." },
+          ],
+        },
+        {
+          type: "fillBlank",
+          heading: "Aperitivo phrases",
+          items: [
+            {
+              template: "Vorrei un Aperol ___ , per favore.",
+              answer: "spritz",
+              en: "I'd like an Aperol Spritz, please.",
+              options: ["spritz", "succo", "tavolo", "tonico"],
+            },
+            {
+              template: "Un ___ di vino bianco, grazie.",
+              answer: "calice",
+              en: "A glass of white wine, thanks.",
+              options: ["bicchiere", "calice", "litro", "Both A and B work"],
+            },
+            {
+              template: "Cosa avete come ___ ?",
+              answer: "stuzzichini",
+              en: "What do you have as snacks?",
+              options: ["pasta", "stuzzichini", "primi", "dolci"],
+            },
+            {
+              template: "Una birra alla ___ , per favore.",
+              answer: "spina",
+              en: "A draft beer, please.",
+              options: ["spina", "bottiglia", "lattina", "punta"],
+            },
+            {
+              template: "Vorrei un ___ di vino della casa.",
+              answer: "quartino",
+              en: "I'd like a small carafe of house wine.",
+              options: ["calice", "bicchiere", "quartino", "litro"],
+            },
+          ],
+        },
+        {
+          type: "translate",
+          heading: "Translate it",
+          direction: "en-to-it",
+          prompt: "Two Aperol Spritzes and a small plate of cheese, please.",
+          reference: "Due Aperol spritz e un piattino di formaggio, per favore.",
+          hint: "Plural drink names like 'spritz' stay invariable. 'Piattino' = small plate.",
+        },
+        {
+          type: "tip",
+          heading: "Coperto and the tipping question",
+          body: "Sit-down bars often charge a <em>coperto</em> (cover charge) of €1-3 per person, listed on the menu. It pays for the bread, table service, etc. — it's NOT a tip, it's how Italians keep menu prices low. Tipping on top of coperto is unusual but never refused. If you want to: round up, or leave €1-2 per person if service was great. No 18-20% culture here.",
+        },
+      ],
+    },
+  ],
+  checkpoint: {
+    passingPct: 80,
+    questions: [
+      {
+        q: "'Un caffè' by default means…",
+        options: ["filter coffee", "espresso", "cappuccino", "americano"],
+        correct: 1,
+      },
+      {
+        q: "Italians don't drink cappuccino after…",
+        options: ["~10 am", "noon", "3 pm", "dinner only"],
+        correct: 0,
+      },
+      {
+        q: "'Al banco' vs 'al tavolo' — which is cheaper?",
+        options: ["al tavolo", "al banco", "same price", "depends on the bar"],
+        correct: 1,
+      },
+      {
+        q: "'I'd like a cream cornetto' =",
+        options: [
+          "Voglio cornetto crema.",
+          "Vorrei un cornetto alla crema.",
+          "Vorrei un cornetto della crema.",
+          "Vorrei un cornetto con crema.",
+        ],
+        correct: 1,
+      },
+      {
+        q: "A 'caffè corretto' is corrected with…",
+        options: ["milk", "sugar", "a shot of grappa/sambuca", "extra water"],
+        correct: 2,
+      },
+      {
+        q: "Aperitivo runs roughly…",
+        options: ["8 am - 10 am", "noon - 2 pm", "6 pm - 9 pm", "after dinner"],
+        correct: 2,
+      },
+      {
+        q: "'How much do I owe you?' =",
+        options: [
+          "Quanto pago?",
+          "Quanto Le devo?",
+          "Quanto costa?",
+          "Both B and C work",
+        ],
+        correct: 1,
+      },
+      {
+        q: "A 'Negroni sbagliato' uses prosecco instead of…",
+        options: ["Campari", "vermouth", "gin", "Aperol"],
+        correct: 2,
+      },
+      {
+        q: "'Coperto' is…",
+        options: [
+          "the tip",
+          "the cover charge per person",
+          "the tax",
+          "the service fee",
+        ],
+        correct: 1,
+      },
+      {
+        q: "Translate: 'Two espressos and a glass of water, please.'",
+        options: [
+          "Due caffè e un bicchiere d'acqua, per favore.",
+          "Due espressi e un acqua, per favore.",
+          "Due caffè americani e d'acqua.",
+          "Per me due espressi.",
+        ],
+        correct: 0,
+      },
+    ],
+  },
+};

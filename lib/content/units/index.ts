@@ -13,6 +13,11 @@ import { UNIT_DIRECTIONS } from "./11-directions";
 import { UNIT_HOTEL } from "./12-hotel";
 import { UNIT_HELP } from "./13-help";
 import { UNIT_LANDMARKS } from "./14-landmarks";
+import { UNIT_BAR } from "./15-bar";
+import { UNIT_TRATTORIA } from "./16-trattoria";
+import { UNIT_FOOD_VOCAB } from "./17-food-vocab";
+import { UNIT_DIET_WINE } from "./18-diet-wine";
+import { UNIT_ROMAN_FOOD } from "./19-roman-food";
 
 /**
  * All authored units, in stage+order sequence.
@@ -33,6 +38,11 @@ export const UNITS: Unit[] = [
   UNIT_HOTEL,
   UNIT_HELP,
   UNIT_LANDMARKS,
+  UNIT_BAR,
+  UNIT_TRATTORIA,
+  UNIT_FOOD_VOCAB,
+  UNIT_DIET_WINE,
+  UNIT_ROMAN_FOOD,
 ];
 
 export const UNITS_BY_SLUG: Record<string, Unit> = Object.fromEntries(
